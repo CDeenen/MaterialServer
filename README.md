@@ -2,6 +2,9 @@
 Material Server is a companion app for the Material Keys and Material Deck modules for Foundry VTT.<br>
 The app forms a bridge between Foundry and the connected hardware device (Novation Launchpad Mk3 for Material Keys, and a Stream Deck for Material Deck). Because Foundry cannot natively support USB devices, this app is required to the modules.<br>
 
+Get the latest release <a href="https://github.com/CDeenen/MaterialServer/releases">here</a>.<br>
+Please go to the main <a href="https://github.com/CDeenen/MaterialDeck">Material Deck</a> or <a href="https://github.com/CDeenen/MaterialKeys">Material Keys</a> github page for more information on the module.
+
 <b>Note: </b>This app has only been tested on my Windows 10 machine. There are Linux and OSX files included, but I don't know if they work. I cannot guarantee compatibility.
 
 ## Starting the app
@@ -13,7 +16,7 @@ The connection to Foundry should go automatically, if the correct IP address is 
 The default port is 3001, but this can be changed in MaterialServer.js.
 
 # Material Deck
-The server should connect automatically.
+The server should connect automatically. 
 
 # Material Keys
 ## Connecting to the Launchpad
