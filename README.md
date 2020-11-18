@@ -13,7 +13,19 @@ For OSX or Linux users, you should run MaterialServer-macos or MaterialServer-li
 
 # Connecting to Foundry
 The connection to Foundry should go automatically, if the correct IP address is set in the module settings. If the app is run on the same computer as the client, the IP addres can be set as 'localhost'. Otherwise, use the IP address that the app prints after startup.<br>
-The default port is 3001, but this can be changed in MaterialServer.js.
+The default port is 3001, but this can be changed, see below.
+
+# Changing the port and enabling debugging
+The default port is 3001, this can be changed by passing arguments into the app.<br>
+The argument takes the form of 'port:[portnumber]', so to set the port to 4000, it would be 'port:4000'.<br>
+<br>
+To enable debugging, pass the following argument: 'debug:true'<br>
+<br>
+In windows, you can do this using 2 ways:<br>
+<ol>
+<li>Create a shortcut to MaterialServer-win.exe. Right-click the shortcut, click properties. In the 'Target' textbox, at the end add the arguments. So to set the port to 4000 and enable debugging the 'Target' textbox would contain: '[pathToApp]\MaterialServer-win.exe port:4000 debug:true'</li>
+<li>Run the app from the command line. Press the 'windows' key, type 'cmd.exe' and press enter. Then either navigate to the app, or drag the app into the command prompt. Add the arguments after 'MaterialServer-win.exe'</li>
+</ol>
 
 # Material Deck
 The server should connect automatically. 
@@ -36,11 +48,11 @@ Besides updating the LEDs, there are some other features, such as setting the LE
 ## Connecting to other MIDI devices
 Right now, only the Novation Launchpad Mini Mk3 is supported. Some other products from the Launchpad lineup should work, however, some edits to the app are required.<br>
 <br>
-You will need to add the device to the variable midiDevices in midiBridge.js. As an example, I've added the Launchpad Mk2 (I don't know if the information is correct).<br>
+You will need to add the device to the variable midiDevices in MaterialServer.js. As an example, I've added the Launchpad Mk2 (I don't know if the information is correct).<br>
 Furthermore, you will have to investigate if the rest of the protocol is compatible. There are multiple points where the program checks if the connected device is a Launchpad Mini Mk3, you'll have to add functionality for your device yourself.<br>
 It is possible that you do not need to change anything, except also allowing your device to use the same code, in which case, please do not edit out the Launchpad Mini Mk3, but add yours to it:<br>
 <br>
 if (midiDevices[this.midiDeviceSelected].name == "Launchpad Mini Mk3" && midiDevices[this.midiDeviceSelected].name == "Launchpad Mk2")<br>
 <br>
- If you then share your midiBridge.js, other people will be able to use it as well.<br>
+ If you then share your MaterialServer.js, other people will be able to use it as well.<br>
 

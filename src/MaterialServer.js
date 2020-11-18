@@ -1,7 +1,7 @@
 //Sets the port of the websocket
-const port = 3001;
+let port = 3001;
 
-const DEBUG = false;
+let DEBUG = false;
 
 let WSconnected = false;
 webSockets = {} // userID: webSocket
@@ -12,9 +12,22 @@ let SDConnected = false;
 const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: port });
 
-require('dns').lookup(require('os').hostname(), function (err, add, fam) {
-    console.log('Websocket on: '+add+':'+port);
-  })
+var myArgs = process.argv.slice(2);
+for (let i=0; i<myArgs.length; i++){
+    let arg = myArgs[i].split(":");
+    if (arg[0] == 'port') port = arg[1];
+    else if (arg[0] == 'debug'){
+        if (arg[1] == 'true') DEBUG = true;
+        else DEBUG = false;
+    } 
+}
+
+if (DEBUG) console.log("Debugging on");
+console.log('Opening websocket on port ' +port);
+
+//require('dns').lookup(require('os').hostname(), function (err, add, fam) {
+ //   console.log('Websocket on: '+add+':'+port);
+ // })
 
 //Stores all compatible Midi devices. id should be a string that occurs in the detected input and output name, and does not occur in any other inputs and outputs
 const midiDevices = [
@@ -60,6 +73,7 @@ wss.on('connection', function (ws) {
     ws.on('message', function incoming(data) {
         let JSONdata = JSON.parse(data);
         if (JSONdata.target == "server"){
+            if (DEBUG) console.log("Connection messages: ",JSONdata);
             if (JSONdata.module == "MK"){
                 MKConnected = true;
                 webSockets[0] = ws;
@@ -91,18 +105,32 @@ wss.on('connection', function (ws) {
                 }
             }
             else if (JSONdata.source == "SD"){
-                SDConnected = true;
-                webSockets[2] = ws;
-                console.log('Stream Deck connected');
-                target = "SD";
-
-                if (MDConnected){
-                    const data = {
-                        target: 'MD',
-                        type: 'connected',
-                        data: 'SD'
+                if (JSONdata.type == "disconnected"){
+                    console.log('Stream Deck disconnected');
+                    SDConnected = false;
+                    if (MDConnected){
+                        const data = {
+                            target: 'MD',
+                            type: 'disconnected',
+                            data: 'SD'
+                        }
+                        wss.broadcast(data);
                     }
-                    wss.broadcast(data);
+                }
+                else {
+                    SDConnected = true;
+                    webSockets[2] = ws;
+                    console.log('Stream Deck connected');
+                    target = "SD";
+
+                    if (MDConnected){
+                        const data = {
+                            target: 'MD',
+                            type: 'connected',
+                            data: 'SD'
+                        }
+                        wss.broadcast(data);
+                    }
                 }
             }
         }
@@ -220,87 +248,88 @@ class Midi{
      * Checks the connection to the midi device every second
      */
     searchMidi(){
-        //Get the MIDI inputs and outputs
-        let inputs = easymidi.getInputs();
-        let outputs = easymidi.getOutputs();
+        if (MKConnected){
+            //Get the MIDI inputs and outputs
+            let inputs = easymidi.getInputs();
+            let outputs = easymidi.getOutputs();
 
-        //If no previous inputs and outputs have been stored, store these
-        if (this.inputs == null && this.outputs == null) {
-            this.inputs = inputs;
-            this.outputs = outputs;
-            this.midiFoundMsg();
-        }
-        let newFound = false;
-        let disconnect = 0;
-        
-        //Check if there is any change in the inputs and outputs compared to the last iteration
-        if (inputs.length != this.inputs.length) 
-            newFound = true;
-        for (let i=0; i<this.inputs.length; i++){
-            if (inputs[i] != this.inputs[i]) 
-                newFound = true;
-            if (inputs[i] == this.inputName) 
-                disconnect++;
-        }
-        if (outputs.length != this.outputs.length) 
-            newFound = true;
-        for (let i=0; i<this.outputs.length; i++){
-            if (outputs[i] != this.outputs[i]) 
-                newFound = true;
-            if (outputs[i] == this.outputName)
-                disconnect++;
-        }
-        
-        //If previously selected device is no longer found, notify user and Foundry
-        if (disconnect < 2 && this.connected) {
-            console.log("\nMIDI device disconnected");
-            midi.close();
-            this.connected = false; 
-
-            if (WSconnected){
-                const data = {
-                    target: 'MK',
-                    type: 'connected',
-                    data: 'null'
-                }                
-                wss.broadcast(data);
+            //If no previous inputs and outputs have been stored, store these
+            if (this.inputs == null && this.outputs == null) {
+                this.inputs = inputs;
+                this.outputs = outputs;
+                this.midiFoundMsg();
             }
-        }
+            let newFound = false;
+            let disconnect = 0;
+            
+            //Check if there is any change in the inputs and outputs compared to the last iteration
+            if (inputs.length != this.inputs.length) 
+                newFound = true;
+            for (let i=0; i<this.inputs.length; i++){
+                if (inputs[i] != this.inputs[i]) 
+                    newFound = true;
+                if (inputs[i] == this.inputName) 
+                    disconnect++;
+            }
+            if (outputs.length != this.outputs.length) 
+                newFound = true;
+            for (let i=0; i<this.outputs.length; i++){
+                if (outputs[i] != this.outputs[i]) 
+                    newFound = true;
+                if (outputs[i] == this.outputName)
+                    disconnect++;
+            }
+            
+            //If previously selected device is no longer found, notify user and Foundry
+            if (disconnect < 2 && this.connected) {
+                console.log("\nMIDI device disconnected");
+                midi.close();
+                this.connected = false; 
 
-        //If new devices are found, print midi devices
-        if (newFound) {
-            this.inputs = inputs;
-            this.outputs = outputs;
-            this.midiFoundMsg();
-        }
+                if (WSconnected){
+                    const data = {
+                        target: 'MK',
+                        type: 'connected',
+                        data: 'null'
+                    }                
+                    wss.broadcast(data);
+                }
+            }
 
-        //If currently not connected to a midi device, check if any of the found inputs and outputs correspond with any device set in midiDevices. If so, connect to that device
-        let conCheck = 0;
-        let input = undefined;
-        let output = undefined;
-        if (this.connected == false){
-            for (let i=0; i<this.inputs.length; i++)
-                for (let j=0; j<midiDevices.length; j++)
-                    if (this.inputs[i].includes(midiDevices[j].id)){
-                        this.midiDeviceSelected = j;
+            //If new devices are found, print midi devices
+            if (newFound) {
+                this.inputs = inputs;
+                this.outputs = outputs;
+                this.midiFoundMsg();
+            }
+
+            //If currently not connected to a midi device, check if any of the found inputs and outputs correspond with any device set in midiDevices. If so, connect to that device
+            let conCheck = 0;
+            let input = undefined;
+            let output = undefined;
+            if (this.connected == false){
+                for (let i=0; i<this.inputs.length; i++)
+                    for (let j=0; j<midiDevices.length; j++)
+                        if (this.inputs[i].includes(midiDevices[j].id)){
+                            this.midiDeviceSelected = j;
+                            conCheck++;
+                            this.inputName = this.inputs[i];
+                            input = inputs[i];
+                            break;
+                        }
+                for (let i=0; i<this.outputs.length; i++)
+                    if (this.outputs[i].includes(midiDevices[this.midiDeviceSelected].id)){
                         conCheck++;
-                        this.inputName = this.inputs[i];
-                        input = inputs[i];
+                        this.outputName = this.outputs[i];
+                        output = outputs[i];
                         break;
                     }
-            for (let i=0; i<this.outputs.length; i++)
-                if (this.outputs[i].includes(midiDevices[this.midiDeviceSelected].id)){
-                    conCheck++;
-                    this.outputName = this.outputs[i];
-                    output = outputs[i];
-                    break;
+                if (conCheck == 2){
+                    if (input != undefined && output != undefined)
+                        this.connect(input,output);
                 }
-            if (conCheck == 2){
-                if (input != undefined && output != undefined)
-                    this.connect(input,output);
             }
         }
-
         //Repeat the search every 2 seconds to check for disconnections or new connections
         setTimeout(() => this.searchMidi(),2000);  
     }
