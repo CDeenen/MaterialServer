@@ -3,7 +3,7 @@ Material Server is a companion app for the Material Keys and Material Deck modul
 The app forms a bridge between Foundry and the connected hardware device (Novation Launchpad Mk3 for Material Keys, and a Stream Deck for Material Deck). Because Foundry cannot natively support USB devices, this app is required to the modules.<br>
 
 Get the latest release <a href="https://github.com/CDeenen/MaterialServer/releases">here</a>.<br>
-Please go to the main <a href="https://github.com/CDeenen/MaterialDeck">Material Deck</a> or <a href="https://github.com/CDeenen/MaterialKeys">Material Keys</a> github page for more information on the module.
+Please go to the main <a href="https://github.com/CDeenen/MaterialDeck">Material Deck</a> or <a href="https://github.com/CDeenen/MaterialKeys">Material Keys</a> github page for more information on the modules.
 
 <b>Note: </b>This app has only been tested on my Windows 10 machine. There are Linux and OSX files included, but I don't know if they work. I cannot guarantee compatibility.
 
@@ -26,8 +26,7 @@ The default port is 3001, but this can be changed, see below.
 ## Changing the port and enabling debugging
 The default port is 3001, this can be changed by passing arguments into the app. You simply enter the desired port number as argument.<br>
 <br>
-To enable debugging, pass the following argument: 'debug'<br>
-<br>
+To enable debugging, pass the following argument: 'debug'
 
 #### Windows
 In windows, you can do this using 2 ways:<br>
@@ -40,7 +39,7 @@ In windows, you can do this using 2 ways:<br>
 Run the app from the terminal. Either navigate to the app, or drag the app into the terminal and add the arguments after 'MaterialServer-macos' or 'MaterialServer-linux'.
 
 ## Material Deck
-The server should connect automatically to Foundry and (if using Material Deck) the Stream Deck.
+The server should connect automatically to Foundry and the Stream Deck.
 
 ## Material Keys
 ### Connecting to the Launchpad
