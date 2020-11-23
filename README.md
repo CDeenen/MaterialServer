@@ -10,16 +10,16 @@ Please go to the main <a href="https://github.com/CDeenen/MaterialDeck">Material
 ## Starting the app
 The app can be downloaded from <a href="https://github.com/CDeenen/MaterialServer/releases">here</a>. Download and extract the archive for your operating system.<br>
 
-### Windows
+#### Windows
 Doubleclick MaterialServer-win.exe.
 
-### OSX
+#### OSX
 Doubleclick MaterialServer-macos
 
-### Linux
+#### Linux
 Open MaterialServer-linux in the terminal
 
-# Connecting to Foundry
+## Connecting to Foundry
 The connection to Foundry should go automatically, if the correct IP address is set in the module settings. If the app is run on the same computer as the client, the IP addres can be set as 'localhost'. Otherwise, use the IP address that the app prints after startup.<br>
 The default port is 3001, but this can be changed, see below.
 
@@ -29,35 +29,35 @@ The default port is 3001, this can be changed by passing arguments into the app.
 To enable debugging, pass the following argument: 'debug'<br>
 <br>
 
-### Windows
+#### Windows
 In windows, you can do this using 2 ways:<br>
 <ol>
 <li>Create a shortcut to MaterialServer-win.exe. Right-click the shortcut, click properties. In the 'Target' textbox, at the end add the arguments. So to set the port to 4000 and enable debugging the 'Target' textbox would contain: '[pathToApp]\MaterialServer-win.exe 4000 debug'</li>
 <li>Run the app from the command line. Press the 'windows' key, type 'cmd.exe' and press enter. Then either navigate to the app, or drag the app into the command prompt. Add the arguments after 'MaterialServer-win.exe'</li>
 </ol>
 
-### OSX & Linux
+#### OSX & Linux
 Run the app from the terminal. Either navigate to the app, or drag the app into the terminal and add the arguments after 'MaterialServer-macos' or 'MaterialServer-linux'.
 
-# Material Deck
+## Material Deck
 The server should connect automatically to Foundry and (if using Material Deck) the Stream Deck.
 
-# Material Keys
-## Connecting to the Launchpad
+## Material Keys
+### Connecting to the Launchpad
 If the app is started and Material Keys is enabled in Foundry, the server will list all the detected MIDI devices on the computer. From this list it will look for the MIDI input and output devices that contain a unique string. In the case of the Launchpad Mini Mk3 on Windows this is "(LPMiniMK3 MIDI)". If the correct device is found, it will open the MIDI ports. If the correct device was not detected, it will try again after 2 seconds.<br>
 Once the Launchpad is connected, it will send a message to Foundry, and it will recheck all MIDI devices to check for a disconnect. In case of a disconnect, Foundry is notified, and the above mentioned search procedure starts again.
 
 <img src="https://github.com/CDeenen/MaterialServer/blob/master/src/img/App.png" width="1000">
 
-## Receiving data from the Launchpad
+### Receiving data from the Launchpad
 If a key on the Launchpad is pressed, the launchpad sends a 'note on' or 'control change' message. 'Note on' for the 64 main keys, and 'control change' for the other keys. The 'note' or 'controller' parameter corresponds with the pressed key, while the 'velocity' or 'value' parameter corresponds with whether the key is pressed or released. The key and press state are then send over a websocket to Foundry, where it is further processed.
 
-## Sending data to the Launchpad
+### Sending data to the Launchpad
 There are various ways to send data to the Launchpad, either through normal MIDI messages, or through SysEx. In this app, only SysEx is used.<br>
 In Foundry, a LED buffer is stored, which contains color and mode data on all the LEDs (the LEDs can have 3 modes: continuous, blinking and fading). When launchpad.updateLEDs() is called in Foundry, the complete LED buffer is sent over the websocket to the app, which then interprets this data and sends the correct SysEx message to the Launchpad, updating all the LEDs.<br>
 Besides updating the LEDs, there are some other features, such as setting the LED brightness.
 
-## Connecting to other MIDI devices
+### Connecting to other MIDI devices
 Right now, only the Novation Launchpad Mini Mk3 is supported. Some other products from the Launchpad lineup should work, however, some edits to the app are required.<br>
 <br>
 You will need to add the device to the variable midiDevices in MaterialServer.js. As an example, I've added the Launchpad Mk2 (I don't know if the information is correct).<br>
