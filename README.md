@@ -8,31 +8,43 @@ Please go to the main <a href="https://github.com/CDeenen/MaterialDeck">Material
 <b>Note: </b>This app has only been tested on my Windows 10 machine. There are Linux and OSX files included, but I don't know if they work. I cannot guarantee compatibility.
 
 ## Starting the app
-The app can be downloaded from <a href="https://github.com/CDeenen/MaterialServer/releases">here</a>. Run MaterialServer-win.exe.<br>
-For OSX or Linux users, you should run MaterialServer-macos or MaterialServer-linux, respectively. As stated before, I do not know if they work.
+The app can be downloaded from <a href="https://github.com/CDeenen/MaterialServer/releases">here</a>. Download and extract the archive for your operating system.<br>
+
+### Windows
+Doubleclick MaterialServer-win.exe.
+
+### OSX
+Doubleclick MaterialServer-macos
+
+### Linux
+Open MaterialServer-linux in the terminal
 
 # Connecting to Foundry
 The connection to Foundry should go automatically, if the correct IP address is set in the module settings. If the app is run on the same computer as the client, the IP addres can be set as 'localhost'. Otherwise, use the IP address that the app prints after startup.<br>
 The default port is 3001, but this can be changed, see below.
 
-# Changing the port and enabling debugging
-The default port is 3001, this can be changed by passing arguments into the app.<br>
-The argument takes the form of 'port:[portnumber]', so to set the port to 4000, it would be 'port:4000'.<br>
+## Changing the port and enabling debugging
+The default port is 3001, this can be changed by passing arguments into the app. You simply enter the desired port number as argument.<br>
 <br>
-To enable debugging, pass the following argument: 'debug:true'<br>
+To enable debugging, pass the following argument: 'debug'<br>
 <br>
+
+### Windows
 In windows, you can do this using 2 ways:<br>
 <ol>
-<li>Create a shortcut to MaterialServer-win.exe. Right-click the shortcut, click properties. In the 'Target' textbox, at the end add the arguments. So to set the port to 4000 and enable debugging the 'Target' textbox would contain: '[pathToApp]\MaterialServer-win.exe port:4000 debug:true'</li>
+<li>Create a shortcut to MaterialServer-win.exe. Right-click the shortcut, click properties. In the 'Target' textbox, at the end add the arguments. So to set the port to 4000 and enable debugging the 'Target' textbox would contain: '[pathToApp]\MaterialServer-win.exe 4000 debug'</li>
 <li>Run the app from the command line. Press the 'windows' key, type 'cmd.exe' and press enter. Then either navigate to the app, or drag the app into the command prompt. Add the arguments after 'MaterialServer-win.exe'</li>
 </ol>
 
+### OSX & Linux
+Run the app from the terminal. Either navigate to the app, or drag the app into the terminal and add the arguments after 'MaterialServer-macos' or 'MaterialServer-linux'.
+
 # Material Deck
-The server should connect automatically. 
+The server should connect automatically to Foundry and (if using Material Deck) the Stream Deck.
 
 # Material Keys
 ## Connecting to the Launchpad
-If the app is started, it will list all the detected MIDI devices on the computer. From this list it will look for the MIDI input and output devices that contain a unique string. In the case of the Launchpad Mini Mk3 this is "(LPMiniMK3 MIDI)". If the correct device is found, it will open the MIDI ports. If the correct device was not detected, it will try again after 2 seconds.<br>
+If the app is started and Material Keys is enabled in Foundry, the server will list all the detected MIDI devices on the computer. From this list it will look for the MIDI input and output devices that contain a unique string. In the case of the Launchpad Mini Mk3 on Windows this is "(LPMiniMK3 MIDI)". If the correct device is found, it will open the MIDI ports. If the correct device was not detected, it will try again after 2 seconds.<br>
 Once the Launchpad is connected, it will send a message to Foundry, and it will recheck all MIDI devices to check for a disconnect. In case of a disconnect, Foundry is notified, and the above mentioned search procedure starts again.
 
 <img src="https://github.com/CDeenen/MaterialServer/blob/master/src/img/App.png" width="1000">

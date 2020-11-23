@@ -1,4 +1,10 @@
 # Changelog Marerial Server
+### v1.0.2 - 23-11-2020
+<ul>
+<li>Improved method to set port and enable debugging</li>
+<li>Working build for Linux and OSX</li>
+</ul>
+
 ### v1.0.1 - 18-11-2020
 <ul>
 <li>Fixed issue where the app would not run without having its dependencies in the same folder</li>
