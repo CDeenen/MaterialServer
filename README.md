@@ -7,6 +7,28 @@ Please go to the main <a href="https://github.com/CDeenen/MaterialDeck">Material
 
 <b>Note: </b>This app has only been tested on my Windows 10 machine. There are Linux and OSX files included, but I don't know if they work. I cannot guarantee compatibility.
 
+## Prerequisites
+
+### Windows
+<ul>
+ <li><a href="https://support.microsoft.com/en-in/help/2977003/the-latest-supported-visual-c-downloads">Microsoft Visual C++</a></li> 
+ <li><a href="https://www.python.org/downloads/">Python</a></li> 
+</ul>
+
+### OSX
+<ul>
+ <li><a href="https://apps.apple.com/us/app/xcode/id497799835?mt=12">Xcode</a> or <a href="https://idmsa.apple.com/IDMSWebAuth/signin?appIdKey=891bd3417a7776362562d2197f89480a8547b108fd934911bcbea0110d07f757&path=%2Fdownload%2Fmore%2F&rv=1">command line tools</a></li> 
+ <li><a href="https://www.python.org/downloads/">Python</a></li> 
+</ul>
+
+### Linux
+<ul>
+ <li>A C++ compiler</li>
+ <li>You must have installed and configured <a href="https://www.alsa-project.org/wiki/Main_Page">ALSA</a></li> 
+ <li><a href="https://www.python.org/downloads/">Python</a></li> 
+ <li>You must install the libasound2-dev package</li>
+</ul>
+
 ## Starting the app
 The app can be downloaded from <a href="https://github.com/CDeenen/MaterialServer/releases">here</a>. Download and extract the archive for your operating system.<br>
 
@@ -18,6 +40,15 @@ Doubleclick MaterialServer-macos
 
 #### Linux
 Open MaterialServer-linux in the terminal
+
+#### Running from the source
+You can run Material Server from the source. This might be helpful if the executable doesn't work.<br>
+<ol>
+ <li>Install <a href="https://nodejs.org/en/">Node.js</a></li>
+ <li>Download the <a href="https://github.com/CDeenen/MaterialServer/tree/master/src">source code</a> for you operating system</li>
+ <li>Using a terminal application, browse to the folder containing MaterialServer.js</li>
+ <li>Run the server using 'node MaterialServer.js'</li>
+</ol>
 
 ## Connecting to Foundry
 The connection to Foundry should go automatically, if the correct IP address is set in the module settings. If the app is run on the same computer as the client, the IP addres can be set as 'localhost'. Otherwise, use the IP address that the app prints after startup.<br>
