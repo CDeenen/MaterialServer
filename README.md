@@ -31,12 +31,21 @@ Please go to the main <a href="https://github.com/CDeenen/MaterialDeck">Material
 
 ## Starting the app
 The app can be downloaded from <a href="https://github.com/CDeenen/MaterialServer/releases">here</a>. Download and extract the archive for your operating system.<br>
+If the system-specific instructions don't work, try running it from the source (see below).
 
 #### Windows
 Doubleclick MaterialServer-win.exe.
 
 #### OSX
-Doubleclick MaterialServer-macos
+OSX has been giving some trouble. First, simply try doubleclicking MaterialServer-macos.<br>
+If that doesn't work, try the following things:<br>
+<br>
+-You might have to give permission to run the executable in Preferences => Security & Privacy => Click 'Run Anyway' or 'Allow'.<br>
+-You might run into the issue that OSX won't open MaterialServer-macos as an executable. Try right-clicking the executable, to 'Open in...' and select Terminal.app.<br>
+-Some users had to give the proper permissions (besides through Security & Privacy) to MaterialSer-macos: Open Terminal.app, navigate to the Material Server folder, and run `chmod 755 MaterialServer-macos` (you might need to add sudo at the start)<br>
+-It has been reported that there are issues with Safari's decompression algorithm. You could try downloading using a different browser, or in the Safari preferences, in the general tab, uncheck 'Open “safe” files after downloading' at the bottom. You will then have to decompress the files using some other software (such as <a href="https://setapp.com/apps/betterzip">BetterZip</a>.<br>
+-If you get an error along the lines of 'midi.node can't opened because it's from unidentified developer' (should only be the case if you're trying to use Material Keys), make sure you go into Preferences => Security & Privacy and allow midi.node to run.<br>
+
 
 #### Linux
 Open MaterialServer-linux in the terminal
@@ -47,6 +56,7 @@ You can run Material Server from the source. This might be helpful if the execut
  <li>Install <a href="https://nodejs.org/en/">Node.js</a></li>
  <li>Download the <a href="https://github.com/CDeenen/MaterialServer/tree/master/src">source code</a> for you operating system</li>
  <li>Using a terminal application, browse to the folder containing MaterialServer.js</li>
+ <li>Run `npm install` to make sure all dependencies are up to date</li>
  <li>Run the server using 'node MaterialServer.js'</li>
 </ol>
 
