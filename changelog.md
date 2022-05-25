@@ -1,4 +1,4 @@
-# Changelog Marerial Server
+# Changelog Material Server
 ### v1.1.0 - 25-05-2022
 <ul>
 <li>Material Server now has a GUI</li>
