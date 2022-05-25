@@ -1,5 +1,5 @@
 # Changelog Marerial Server
-### v1.1.0 - 27-04-2022
+### v1.1.0 - 25-05-2022
 <ul>
 <li>Material Server now has a GUI</li>
 <li>Support for Material Plane added (both USB or WiFi)</li>
