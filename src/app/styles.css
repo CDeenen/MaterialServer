@@ -1,0 +1,141 @@
+body {
+    background-color: #4f4f4f;
+    color: white;
+    font-family:'Arial';
+}
+
+.mainBody {
+    height: 720px;
+    max-height: 720px;
+    position: relative;
+    overflow: auto;
+}
+
+.footer {
+    font-size: 0.85em;
+    text-align: center;
+    color: gray;
+}
+
+.hyperlink {
+    color: gray;
+}
+
+h3 {
+    margin-bottom: 5px;
+}
+
+.expandable {
+    cursor: pointer;
+}
+.collapsed {
+    display:none;
+}
+.section {
+    margin-left: 15px;
+}
+.expandableIcon {
+    border: none;
+}
+
+.form-elements {
+    width: 100%;
+    display: flex;
+    margin-bottom: 2px;
+}
+
+.notes {
+    font-size: 0.75em;
+    font-style: italic;
+    color: darkgrey;
+    margin-bottom: 20px;
+}
+
+.form-elements label {
+    width: 50%;
+}
+
+.form-elements .form-val {
+    position: absolute;
+    right: 0px;
+    padding-right: 10px;
+    display: flex;
+    justify-content: flex-end;
+    width: 35%;
+}
+
+.form-elements .form-val input[type='text'],
+.form-elements .form-val input[type='number'],
+.form-elements .form-val select {
+    flex-grow: 4;
+}
+
+.connTable,
+.sdTable,
+.mkTable {
+    width: 100%;
+}
+
+.connTable tr,
+.sdTable tr,
+.mkTable tr {
+    width: 100%;
+}
+.sdTable td,
+.mkTable td {
+    font-size: 0.9em;
+}
+
+.notes.connTable,
+.notes.sdTable,
+.notes.mkTable {
+    margin-top: 2.5px;
+}
+
+.connTable-Module {
+    text-align: left;
+    width: 60%;
+}
+
+.connTable-Foundry,
+.connTable-Device {
+    text-align: center;
+    vertical-align:middle;
+}
+
+.connTable input[type='checkbox'],
+.moduleCB {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    font-size: 1em;
+}
+
+.connTable input[type='checkbox']:checked:after,
+.moduleCB:checked:after,
+.cbChecked {
+    content: '✔';
+    color: green;
+}
+
+.connTable input[type='checkbox']:not(:checked):after,
+.moduleCB:not(:checked):after,
+.cbUnchecked {
+    content: '✘';
+    color: red;
+}
+
+.sdTable-Name {
+    text-align: left;
+    width: 60%;
+}
+
+.sdTable-Type {
+    text-align: left;
+}
+
+.mkTable-Data {
+    text-align: left;
+    width: 50%;
+}

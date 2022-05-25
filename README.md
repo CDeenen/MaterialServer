@@ -8,4 +8,4 @@ Get the latest release <a href="https://github.com/CDeenen/MaterialServer/releas
 Please go to the main <a href="https://github.com/CDeenen/MaterialDeck">Material Deck</a>, <a href="https://github.com/CDeenen/MaterialKeys">Material Keys</a>, or <a href="https://github.com/cdeenen/materialplane">Material Plane</a> repositories for more information on the modules.
 
 ## Documentation
-Documentation can be found <a href="https://github.com/CDeenen/MaterialServer/wiki">here</a>
+Documentation can be found <a href="https://github.com/CDeenen/MaterialServer/wiki">here</a>.

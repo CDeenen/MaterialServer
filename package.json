@@ -1,0 +1,74 @@
+{
+  "name": "materialserver",
+  "productName": "materialserver",
+  "version": "1.1.0",
+  "description": "Companion app for various Material Foundry modules",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "keywords": [],
+  "author": {
+    "name": "Cristian Deenen",
+    "email": "cdeenen@outlook.com"
+  },
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "src/app/images/icons"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "materialserver"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            [
+              "darwin",
+              "linux"
+            ]
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-dmg",
+          "config": {}
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "easymidi": "^2.1.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "ip": "^1.1.5",
+    "midi": "^2.0.0",
+    "serialport": "^10.4.0",
+    "ws": "^8.5.0"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.63",
+    "@electron-forge/maker-deb": "^6.0.0-beta.63",
+    "@electron-forge/maker-dmg": "^6.0.0-beta.63",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.63",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
+    "@electron-forge/maker-zip": "^6.0.0-beta.63",
+    "electron": "18.1.0",
+    "electron-icon-builder": "^2.0.1"
+  }
+}

@@ -1,4 +1,11 @@
 # Changelog Marerial Server
+### v1.1.0 - 27-04-2022
+<ul>
+<li>Material Server now has a GUI</li>
+<li>Support for Material Plane added (both USB or WiFi)</li>
+<li>Multiple clients can now connect to Material Server at the same time, allowing multiple clients to control a Stream Deck or the Material Plane sensor</li>
+</ul>
+
 ### v1.0.2 - 23-11-2020
 <ul>
 <li>Improved method to set port and enable debugging</li>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lan="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Material Server</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/3c1a1d5545.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="mainBody">
+        <h1 class="expandable"><img src="images/arrow-down.png" class="expandableIcon" style="width:25px">Status</h1>
+        <div class="section">
+            <div class="form-elements">
+                <label for="materialServerAddress">Material Server Address:</label>
+                <div class="form-val">
+                    <input type="text" id="materialServerAddress" value="" disabled>
+                </div>
+            </div>
+            <p class="notes">
+                Material Server address to use in Foundry.
+            </p>
+
+            <div class="form-elements">
+                <label for="materialServerAddressRemote">Remote Material Server Address:</label>
+                <div class="form-val">
+                    <input type="text" id="materialServerAddressRemote" value="" disabled>
+                </div>
+            </div>
+            <p class="notes">
+                Remote Material Server address. You can use this address instead of 'Material Server Address'. 
+                Should only be necessary if Material Server is not on the same machine as the Foundry client.
+            </p>
+        
+            <h3>Connection Status</h3>
+            <table class="connTable" id="connTable">
+                <tr>
+                    <th class="connTable-Module">Module</th>
+                    <th class="connTable-Foundry">Foundry</th>
+                    <th class="connTable-Device">Device</th>
+                </tr>
+                <tr>
+                    <td class="connTable-Module">Material Deck</td>
+                    <td class="connTable-Foundry"><input type="checkbox" id="mdFoundry" disabled></td>
+                    <td class="connTable-Device"><input type="checkbox" id="mdDevice" disabled></td>
+                </tr>
+                <tr>
+                    <td class="connTable-Module">Material Keys</td>
+                    <td class="connTable-Foundry"><input type="checkbox" id="mkFoundry" disabled></td>
+                    <td class="connTable-Device"><input type="checkbox" id="mkDevice" disabled></td>
+                </tr>
+                <tr>
+                    <td class="connTable-Module">Material Plane</td>
+                    <td class="connTable-Foundry"><input type="checkbox" id="mpFoundry" disabled></td>
+                    <td class="connTable-Device"><input type="checkbox" id="mpDevice" disabled></td>
+                </tr>
+            </table>
+
+            <p class="notes connTable">
+                The connection status of each supported module and its corresponding device (Material Plane sensor, Stream Deck, etc) is displayed, 
+                where <span class='cbChecked'>✔</span> indicates a connection and <span class='cbUnchecked'>✘</span> indicates no connection.
+            </p>
+        </div>
+        
+        <h1 class="expandable"><img src="images/arrow-right.png" class="expandableIcon" style="width:25px">Material Deck</h1>
+        <div class="collapsed">
+            <div class="form-elements">
+                <label for="mdFoundryCb">Material Deck Connected:</label>
+                <div class="form-val">
+                    <input class="moduleCB" type="checkbox" id="mdFoundryCb" disabled>
+                </div>
+            </div>
+            <p class="notes">
+                Displays whether the Material Deck module is connected to Material Server.
+            </p>
+
+            <div class="form-elements">
+                <label for="mdDeviceCb">Stream Deck Application Connected:</label>
+                <div class="form-val">
+                    <input class="moduleCB" type="checkbox" id="mdDeviceCb" disabled>
+                </div>
+            </div>
+            <p class="notes">
+                Displays whether the Stream Deck plugin is connected to Material Server.
+            </p>
+
+            <table class="sdTable" id="sdTable">
+                <tr>
+                    <th class="sdTable-Name">Name</th>
+                    <th class="sdTable-Type">Type</th>
+                </tr>
+                <div id="sdEntries"></div>
+                
+            </table>
+
+            <p class="notes sdTable">
+                List of connected Stream Decks with Material Deck actions.
+            </p>
+        </div>
+
+        <h1 class="expandable"><img src="images/arrow-right.png" class="expandableIcon" style="width:25px">Material Keys</h1>
+        <div class="collapsed">
+            <div class="form-elements">
+                <label for="mkFoundryCb">Material Keys Connected:</label>
+                <div class="form-val">
+                    <input class="moduleCB" type="checkbox" id="mkFoundryCb" disabled>
+                </div>
+            </div>
+            <p class="notes">
+                Displays whether the Material Keys module is connected to Material Server.
+            </p>
+
+            <div class="form-elements">
+                <label for="mkDeviceCb">Launchpad Connected:</label>
+                <div class="form-val">
+                    <input class="moduleCB" type="checkbox" id="mkDeviceCb" disabled>
+                </div>
+            </div>
+            <p class="notes">
+                Displays whether a Launchpad is connected to Material Server.
+            </p>
+
+            <table class="mkTable" id="mkTable">
+                <tr>
+                    <th class="mkTable-Data">Inputs</th>
+                    <th class="mkTable-Data">Outputs</th>
+                </tr>
+                <div id="mkEntries"></div>
+                
+            </table>
+
+            <p class="notes mkTable">
+                List of available MIDI inputs and outputs. 
+                <span style="color:orange">Orange</span> in/outputs are compatible with Material Keys.
+                <span style="color:green">Green</span> in/outputs are connected to Material Server.
+            </p>
+        </div>
+
+        <h1 class="expandable"><img src="images/arrow-right.png" class="expandableIcon" style="width:25px">Material Plane</h1>
+        <div class="collapsed">
+            <div class="form-elements">
+                <label for="mpFoundryCb">Material Plane Connected:</label>
+                <div class="form-val">
+                    <input class="moduleCB" type="checkbox" id="mpFoundryCb" disabled>
+                </div>
+            </div>
+            <p class="notes">
+                Displays whether the Material Plane module is connected to Material Server.
+            </p>
+            <div class="form-elements">
+                <label for="mdDeviceCb">Material Plane Sensor Connected:</label>
+                <div class="form-val">
+                    <input class="moduleCB" type="checkbox" id="mpDeviceCb" disabled>
+                </div>
+            </div>
+            <p class="notes">
+                Displays whether the Material Plane sensor is connected to Material Server.
+            </p>
+            <div class="form-elements">
+                <label for="port">Enable USB:</label>
+                <div class="form-val">
+                    <input type="checkbox" id="enableUSB">
+                </div>
+            </div>
+            <p class="notes">
+                Enable the Material Plane sensor to connect through USB.
+            </p>
+
+            <div class="form-elements">
+                <label for="comPort">USB COM Port:</label>
+                <div class="form-val">
+                    <select id="comPort"></select>
+                    <button type="button" id="refreshComPort"><i class="fa-solid fa-rotate"></i></button>
+                </div>
+            </div>
+            <p class="notes">
+                Select the COM port of the Material Plane sensor. Press the refresh button to scan for new devices.
+                If this is not known, disconnect the sensor and press the scan button. Take note of all available COM ports.
+                Then (re)connect the sensor, scan for new devices, and select the new port.
+            </p>
+        </div>
+        
+        <h1 class="expandable"><img src="images/arrow-right.png" class="expandableIcon" style="width:25px">Settings</h1>
+        <div class="collapsed">
+            <div class="form-elements">
+                <label for="port">Websocket Port:</label>
+                <div class="form-val">
+                    <input type="number" id="port" min="0" max="65535" value="3001">
+                    <button type="button" id="applyPort">Apply</button>
+                </div>
+                
+            </div>
+            <p class="notes">
+                Sets the websocket port for Foundry to listen to. 
+                Changing this will require you to reconfigure the Material Server address in the module settings to reflect the change. 
+                Material Server will restart after a change.
+            </p>
+
+            <div class="form-elements">
+                <label for="runInTray">Run in tray:</label>
+                <div class="form-val">
+                    <input type="checkbox" id="runInTray">
+                </div>
+            </div>
+            <p class="notes">
+                Run the application in the tray. Will restart Material Server.
+            </p>
+        </div>
+    </div>
+
+    <div class="footer">   
+        <a class="hyperlink" href="https://github.com/CDeenen/MaterialServer" target="_blank">GitHub</a> |
+        <a class="hyperlink" href="https://github.com/CDeenen/MaterialServer/wiki" target="_blank">Wiki</a> |
+        <a class="hyperlink" href="https://github.com/CDeenen/MaterialServer/releases" target="_blank">Releases</a> |
+        <a class="hyperlink" href="https://discord.gg/3hd4G6TkmA" target="_blank">Discord</a> |
+        <a class="hyperlink" href="https://www.patreon.com/materialfoundry" target="_blank">Patreon</a>
+    </div>
+
+    <script>
+        require('./index.js')
+    </script>
+</body>
+</html> 

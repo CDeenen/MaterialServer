@@ -1,0 +1,10 @@
+-Install node.js https://nodejs.org/en/download/
+-Install python v3
+-OSX: Install a version of Xcode or Command Line Tools
+-Linux: Install git, ALSA, libasound2-dev, build-essential 
+-Open a terminal window and navigate to the MaterialServer folder
+-Run `npm install` to install all the dependencies
+-Run 'npm start' to start Material Server from the source, check if it runs without errors
+-Run 'npm run make' to build Material Server
+-The application should be in /out/Material Server-[platform]. Try to run 'Material Server.exe' [win] or 'Material Server' [linux/osx]
+-You can now move the 'Material Server-[platform]' folder to a preferred location
